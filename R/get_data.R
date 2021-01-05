@@ -258,7 +258,7 @@ get_data <-
       while (start <= end) {
         ## process strings for download information
         string <-
-          paste("RP", format(start, "%Y%m"), ".gbl", sep = "")
+          paste("wrfout_d01_", format(start, "%Y%m%d"), ".ARL", sep = "")
         vectorfiles[i] <- string
         lubridate::month(start) <- lubridate::month(start) + 1
         i = i + 1

@@ -1,7 +1,7 @@
 Package: disperseR
 Type: Package
 Title: Run HYSPLIT many times in parallel, aggregate to zip code level, plot the results, save the plots. 
-Version: 0.1.0
+Version: 0.1.1
 Author: person("Lucas", "Henneman", email = "lhenneman@gmail.com", role = c("aut", "cre"))
 Authors@R: c(
     person("Lucas", "Henneman", role = c("aut", "cre")),

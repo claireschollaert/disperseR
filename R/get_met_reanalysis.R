@@ -18,10 +18,10 @@
 
 #' @export get_met_reanalysis
 get_met_reanalysis <- function(files = NULL,
-  years = NULL,
-  path_met_files) {
+                               years = NULL,
+                               path_met_files,
+                               reanalysis_dir = "ftp://arlftp.arlhq.noaa.gov/archives/wrf27km/avg/2005/") {
 
-  reanalysis_dir <- "ftp://arlftp.arlhq.noaa.gov/archives/reanalysis/"
 
   # Download list of reanalysis met files by name
   if (!is.null(files)) {
@@ -31,9 +31,9 @@ get_met_reanalysis <- function(files = NULL,
       if (.Platform$OS.type == "windows") {
         download(
           url = paste0(reanalysis_dir,
-            files[i]),
+                       files[i]),
           destfile = file.path(path_met_files,
-            files[i]),
+                               files[i]),
           method = "auto",
           quiet = FALSE,
           mode = "wb",
@@ -43,9 +43,9 @@ get_met_reanalysis <- function(files = NULL,
       if (.Platform$OS.type == "unix") {
         download.file(
           url = paste0(reanalysis_dir,
-            files[i]),
+                       files[i]),
           destfile = file.path(path_met_files,
-            files[i]),
+                               files[i]),
           method = "auto",
           quiet = FALSE,
           mode = "wb",
@@ -58,22 +58,29 @@ get_met_reanalysis <- function(files = NULL,
   if (!is.null(years)) {
     for (i in 1:length(years)) {
       for (j in 1:12) {
-        if (.Platform$OS.type == "unix") {
+        for(k in 1:31){
+          if (.Platform$OS.type == "unix") {
           download.file(
             url = paste0(reanalysis_dir,
-              "RP",
-              years[i],
-              formatC(j, width = 2,
-                format = "d",
-                flag = "0"),
-              ".gbl"),
+                         "wrfout_d01_",
+                         years[i],
+                         formatC(j, width = 2,
+                                 format = "d",
+                                 flag = "0"),
+                         formatC(k, width = 2,
+                                 format = "d",
+                                 flag = "0"),
+                         ".ARL"),
             destfile = file.path(path_met_files,
-              paste0( "RP",
-                years[i],
-                formatC(j, width = 2,
-                  format = "d",
-                  flag = "0"),
-                ".gbl")),
+                                 paste0( "wrfout_d01_",
+                                         years[i],
+                                         formatC(j, width = 2,
+                                                 format = "d",
+                                                 flag = "0"),
+                                         formatC(k, width = 2,
+                                                 format = "d",
+                                                 flag = "0"),
+                                         ".ARL")),
             method = "auto",
             quiet = FALSE,
             mode = "wb",
@@ -83,23 +90,29 @@ get_met_reanalysis <- function(files = NULL,
         if (.Platform$OS.type == "windows") {
           download.file(
             url = paste0(reanalysis_dir,
-              "RP",
-              years[i],
-              formatC(j, width = 2,
-                format = "d",
-                flag = "0"),
-              ".gbl"),
+                         "wrfout_d01_",
+                         years[i],
+                         formatC(j, width = 2,
+                                 format = "d",
+                                 flag = "0"),
+                         formatC(k, width = 2,
+                                 format = "d",
+                                 flag = "0"),
+                         ".ARL"),
             destfile = file.path(path_met_files,
-              paste0( "RP",
-                years[i],
-                formatC(j, width = 2,
-                  format = "d",
-                  flag = "0"),
-                ".gbl")),
+                                 paste0( "wrfout_d01_",
+                                         years[i],
+                                         formatC(j, width = 2,
+                                                 format = "d",
+                                                 flag = "0"),
+                                         formatC(k, width = 2,
+                                                 format = "d",
+                                                 flag = "0"),
+                                         ".ARL")),
             method = "auto",
             quiet = FALSE,
             mode = "wb",
-            cacheOK = FALSE)
+            cacheOK = FALSE)}
         }
       }
     }
